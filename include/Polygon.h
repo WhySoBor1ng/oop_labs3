@@ -8,9 +8,10 @@ class Polygon : public Figure
 {
 protected:
     int _vertex_count;
-    std::vector<Point> points;
+    std::vector<Point> _points;
 
 public:
+    Polygon(int count, std::vector<Point> points);
     virtual ~Polygon() noexcept;
 
     virtual Point get_center() const = 0;
