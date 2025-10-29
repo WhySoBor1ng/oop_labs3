@@ -11,12 +11,12 @@ protected:
     std::vector<Point> _points;
 
 public:
-    Polygon(int count, std::vector<Point> points);
-    virtual ~Polygon() noexcept;
+    Polygon(int count, std::vector<Point>const& points);
+    ~Polygon() noexcept override = default;
 
-    virtual Point get_center() const = 0;
+    Point get_center() const override = 0;
 
-    virtual operator double() const = 0;
+    explicit operator double() const override = 0;
 };
 
 #endif
