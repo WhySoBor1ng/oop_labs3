@@ -3,10 +3,17 @@
 
 #include "Point.h"
 
+
 class Figure
 {
+protected:
+    Figure() = default;
+
 public:
     virtual ~Figure() noexcept = default;
+
+    Figure(const Figure&) = delete;
+    Figure(Figure&&) = delete;
 
     virtual Point get_center() const = 0;
 

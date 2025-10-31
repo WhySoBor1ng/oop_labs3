@@ -1,40 +1,52 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle() : Polygon(4, std::vector<Point>(4)) {}
 
-Rectangle::Rectangle(const Rectangle &other) : Polygon(other._vertex_count, other._points) {}
+Rectangle::Rectangle() : Polygon(4) {}
 
-Rectangle::Rectangle(Rectangle &&other) noexcept : Polygon(std::move(other._vertex_count), std::move(other._points)) {}
+Rectangle::Rectangle(std::initializer_list<Point> points) : Polygon(points)
+{
+    if (_vertex_count != 4) {
+        throw std::invalid_argument("Rectangle must have 4 points");
+    }
+}
+
+Rectangle::Rectangle(const Rectangle &other) : Polygon(other) {}
+
+Rectangle::Rectangle(Rectangle &&other) noexcept : Polygon(other) {}
 
 Point Rectangle::get_center() const
 {
-    double average_x = 0;
-    double average_y = 0;
-
-    for (int i = 0; i < _vertex_count; i++)
-    {
-        average_x += _points[i].x;
-        average_y += _points[i].y;
-    }
-
-    average_x /= _vertex_count;
-    average_y /= _vertex_count;
-
-    return Point(average_x, average_y);
+    return Polygon::get_center();
 }
 
-Rectangle &Rectangle::operator=(const Rectangle &other) {
-
-}
-
-std::istream &operator>>(std::istream &istream, Polygon &object)
+Rectangle &Rectangle::operator=(const Rectangle &other)
 {
-    for (int i = 0; i < 4; i++)
+    Polygon::operator=(other);
+    return *this;
+}
 
-    // {
-    //     if (!(istream >> ) && !(istream >> point.y))
-    //     {
-    //         throw std::invalid_argument("Invalid arguments for point");
-    //     }
-    // }
+Rectangle &Rectangle::operator=(Rectangle &&other) noexcept
+{
+    Polygon::operator=(other);
+    return *this;
+}
+
+bool Rectangle::operator==(const Rectangle &other) const
+{
+    return Polygon::operator==(other);
+}
+
+std::istream &operator>>(std::istream &istream, Rectangle &object)
+{
+    return istream >> static_cast<Polygon&>(object);
+}
+
+std::ostream &operator<<(std::ostream &ostream, const Rectangle &object)
+{
+    return ostream << static_cast<const Polygon&>(object);
+}
+
+Rectangle::operator double() const
+{
+    return Polygon::operator double();
 }

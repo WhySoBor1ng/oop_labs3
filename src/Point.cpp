@@ -1,14 +1,15 @@
 #include "Point.h"
 
+#include <cmath>
+
+
 Point::Point() : x(0.0), y(0.0) {}
 
 Point::Point(double x, double y) : x(x), y(y) {}
 
-Point::~Point() {}
-
 std::istream &operator>>(std::istream &istream, Point &point)
 {
-    if (!(istream >> point.x) && !(istream >> point.y))
+    if (!(istream >> point.x) || !(istream >> point.y))
     {
         throw std::invalid_argument("Invalid arguments for point");
     }
@@ -18,5 +19,17 @@ std::istream &operator>>(std::istream &istream, Point &point)
 
 std::ostream &operator<<(std::ostream &ostream, const Point &point)
 {
-    return ostream << point.x << " " << point.y;
+    return ostream << "(" << point.x << ", " << point.y << ")" << std::endl;
 }
+
+bool Point::operator<(const Point &other) const
+{
+    return (x - other.x < -eps) || (fabs(x - other.x) < eps && y - other.y < -eps);
+}
+
+bool Point::operator==(const Point &other) const
+{
+    return (fabs(x - other.x) < eps && fabs(y - other.y) < eps);
+}
+
+Point &Point::operator=(const Point &other) = default;

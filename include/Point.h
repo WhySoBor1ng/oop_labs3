@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+
+constexpr double eps = 1e-6;
+
 struct Point
 {
     double x;
@@ -10,7 +13,13 @@ struct Point
 
     Point();
     Point(double x, double y);
-    ~Point();
+    Point(const Point &other) = default;
+    Point(Point &&other) noexcept = default;
+    ~Point() noexcept = default;
+
+    bool operator<(const Point &other) const;
+    bool operator==(const Point &other) const;
+    Point &operator=(const Point &other);
 
     friend std::istream &operator>>(std::istream &istream, Point &point);
     friend std::ostream &operator<<(std::ostream &ostream, const Point &point);
