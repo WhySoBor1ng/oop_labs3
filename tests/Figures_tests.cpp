@@ -342,7 +342,7 @@ TEST(TrapezoidTests, AreaCalculation) {
     std::istringstream is("0 0 2 0 3 1 1 1");
     is >> trap;
     double area = static_cast<double>(trap);
-    EXPECT_NEAR(area, 1.5, 0.01);
+    EXPECT_NEAR(area, 2.0, 0.01);
 }
 
 TEST(TrapezoidTests, InputStreamInvalidInput) {

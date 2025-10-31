@@ -13,8 +13,8 @@ public:
     Square(Square &&other) noexcept;
     ~Square() noexcept override = default;
 
-    Square &Square::operator=(const Square &other);
-    Square &Square::operator=(Square &&other) noexcept;
+    Square &operator=(const Square &other);
+    Square &operator=(Square &&other) noexcept;
 
     friend std::istream &operator>>(std::istream &istream, Square &object);
     friend std::ostream &operator<<(std::ostream &ostream, const Square &object);
