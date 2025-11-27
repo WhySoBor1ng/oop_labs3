@@ -38,8 +38,10 @@ Polygon &Polygon::operator=(const Polygon &other)
 
 Polygon &Polygon::operator=(Polygon &&other) noexcept
 {
-    _vertex_count = other._vertex_count;
-    _points = std::move(other._points);
+    if (this != &other) {
+        _vertex_count = other._vertex_count;
+        _points = std::move(other._points);
+    }
 
     return *this;
 }

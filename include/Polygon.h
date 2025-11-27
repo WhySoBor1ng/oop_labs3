@@ -16,16 +16,17 @@ protected:
 
     Polygon& operator=(const Polygon& other);
     Polygon& operator=(Polygon&& other) noexcept;
-    bool operator==(const Polygon& other) const;
-    explicit operator double() const override;
-
-    Point get_center() const override;
 
     size_t _vertex_count;
     std::vector<Point> _points;
 
 public:
     ~Polygon() noexcept override = default;
+
+    explicit operator double() const override;
+    bool operator==(const Polygon& other) const;
+
+    Point get_center() const override;
 
     friend std::istream &operator>>(std::istream &istream, Polygon &object);
     friend std::ostream &operator<<(std::ostream &ostream, const Polygon &object);

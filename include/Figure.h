@@ -8,17 +8,16 @@ class Figure
 {
 protected:
     Figure() = default;
-
-public:
-    virtual ~Figure() noexcept = default;
-
     Figure(const Figure&) = delete;
     Figure(Figure&&) = delete;
 
-    virtual Point get_center() const = 0;
-
     Figure& operator=(const Figure& other) = delete;
     Figure& operator=(Figure&& other) = delete;
+public:
+    virtual ~Figure() noexcept = default;
+
+    virtual Point get_center() const = 0;
+
     virtual explicit operator double() const = 0;
 };
 

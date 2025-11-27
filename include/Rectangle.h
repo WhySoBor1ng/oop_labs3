@@ -9,22 +9,12 @@ class Rectangle : public Polygon
 public:
     Rectangle();
     Rectangle(std::initializer_list<Point> points);
-    Rectangle(const Rectangle &other);
-    Rectangle(Rectangle &&other) noexcept;
+    Rectangle(const Rectangle &other) = default;
+    Rectangle(Rectangle &&other) noexcept = default;
     ~Rectangle() noexcept override = default;
 
-    Point get_center() const override;
-
-    Rectangle& operator=(const Rectangle& other);
-    Rectangle& operator=(Rectangle&& other) noexcept;
-
-    bool operator==(const Rectangle &other) const;
-    explicit operator double() const override;
-    friend std::istream &operator>>(std::istream &istream, Rectangle &object);
-    friend std::ostream &operator<<(std::ostream &ostream, const Rectangle &object);
+    Rectangle& operator=(const Rectangle& other) = default;
+    Rectangle& operator=(Rectangle&& other) noexcept = default;
 };
-
-std::istream &operator>>(std::istream &istream, Rectangle &object);
-std::ostream &operator<<(std::ostream &ostream, const Rectangle &object);
 
 #endif
